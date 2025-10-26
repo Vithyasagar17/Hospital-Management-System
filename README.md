@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Hospital Management System (HMS)
 
 A small Flask-based hospital management demo app. This README explains how to set up the project in PowerShell on Windows, create the database, and run the application using the bundled virtual environment.
@@ -77,3 +78,7 @@ C:\path\to\project\venv\Scripts\python.exe run.py
 - Replace CDN Bootstrap with locally served files if offline usage is required.
 
 If you want, I can add `start.ps1` and/or create a `docs/` folder with more developer notes. Just tell me which to add next.
+=======
+# Hospital_Management_System
+This is my MAD I Project for my BS degree at IIT Madras
+>>>>>>> 91606834128df718ed49fe113444b77c32540de4
