@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">HMS - Doctor</a>
+      <div class="d-flex">
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-light btn-sm">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Welcome Dr. {{ current_user.username }}!</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm border-success">
+          <div class="card-body">
+            <h5 class="card-title">Today's Appointments</h5>
+            <p class="card-text">Check your scheduled appointments for today.</p>
+            <a href="#" class="btn btn-success">View</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-primary">
+          <div class="card-body">
+            <h5 class="card-title">Patient Records</h5>
+            <p class="card-text">Access your patients’ details and past treatments.</p>
+            <a href="#" class="btn btn-primary">Open Records</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-warning">
+          <div class="card-body">
+            <h5 class="card-title">Prescriptions</h5>
+            <p class="card-text">Manage prescriptions and medical advice for patients.</p>
+            <a href="#" class="btn btn-warning">Manage</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-muted mt-5">
+    <p>© 2025 Hospital Management System | Doctor Portal</p>
+  </footer>
+</body>
+</html>

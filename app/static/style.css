@@ -1,0 +1,202 @@
+/* -------------------------------------------------------------------
+ * Global Styling for Hospital Management System (HMS)
+ * ------------------------------------------------------------------- */
+
+body {
+    font-family: 'Inter', sans-serif; /* Recommended modern font */
+    background-color: #e9ecef; /* Light gray background */
+    min-height: 100vh;
+}
+
+/* Primary Color Palette (Medical Blue/Teal) */
+:root {
+    /* Updated cohesive palette */
+    --hms-primary: #0d6efd; /* Bootstrap primary blue */
+    --hms-accent: #0dcaf0;  /* cyan accent */
+    --hms-success: #28a745; /* green */
+    --hms-bg: #f8fafc; /* very light background */
+}
+
+/* Navbar Customization */
+.navbar {
+    background-color: var(--hms-primary) !important;
+    border-bottom: 3px solid rgba(13,110,253,0.12);
+}
+
+/* Card and Forms Styling */
+.card {
+    border-radius: 12px; /* Smoother rounded corners */
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-weight: 600;
+}
+
+/* Form Inputs */
+.form-control, .btn {
+    border-radius: 20px; /* Highly rounded inputs and buttons */
+}
+
+/* Button Customization */
+.btn-primary {
+    background-color: var(--hms-primary);
+    border-color: var(--hms-primary);
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-success {
+    background-color: var(--hms-success);
+    border-color: var(--hms-success);
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+    border-color: #1e7e34;
+}
+
+/* Dashboard Stat Cards */
+.card.bg-info { background-color: var(--hms-info) !important; }
+
+body {
+        font-family: Arial, sans-serif;
+        background: var(--hms-bg);
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar brand logo sizing */
+.navbar-brand img {
+    height: 36px;
+    width: auto;
+}
+
+nav {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.container {
+    padding: 20px;
+}
+
+/* ---------- Auth (login / register) styles ---------- */
+.auth-wrapper {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+    text-align: left;
+}
+
+.auth-title {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    color: #0f172a;
+}
+
+.auth-sub {
+    margin: 0 0 18px 0;
+    color: #475569;
+    font-size: 13px;
+}
+
+.auth-form .form-group {
+    margin-bottom: 12px;
+}
+
+.auth-form .form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--hms-primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.08);
+}
+
+.form-actions {
+    margin-top: 14px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: var(--hms-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.muted {
+    color: #6b7280;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+/* Flash message styles */
+.flash {
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+.flash.success { background: #ecfdf5; color: #065f46; }
+.flash.warning { background: #fffbeb; color: #92400e; }
+.flash.danger { background: #fff1f2; color: #991b1b; }
+
+@media (max-width: 480px) {
+    .auth-card { padding: 18px; }
+    .auth-title { font-size: 18px; }
+    .auth-sub { font-size: 12px; }
+    .auth-form .form-row { flex-direction: column; }
+}
