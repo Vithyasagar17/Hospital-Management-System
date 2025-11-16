@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Medical History</h2>
+
+  {% if appointments %}
+    {% for appointment in appointments %}
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Appointment on {{ appointment.date.strftime('%Y-%m-%d') }} at {{ appointment.time }}</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Doctor:</strong> Dr. {{ appointment.doctor.name if appointment.doctor else '—' }}</p>
+        <p><strong>Reason for Visit:</strong> {{ appointment.reason }}</p>
+        
+        {% if appointment.prescriptions %}
+          {% for prescription in appointment.prescriptions %}
+          <div class="mt-4">
+            <h6>Prescription Details</h6>
+            <p><strong>Diagnosis:</strong> {{ prescription.diagnosis }}</p>
+            
+            {% if prescription.items %}
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Medicine</th>
+                    <th>Dosage</th>
+                    <th>Duration</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in prescription.items %}
+                  <tr>
+                    <td>{{ item.medicine }}</td>
+                    <td>{{ item.dosage or '—' }}</td>
+                    <td>{{ item.duration or '—' }}</td>
+                    <td>{{ item.quantity or '—' }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+            <p class="text-muted">No medicines prescribed.</p>
+            {% endif %}
+          </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">No prescriptions for this visit.</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-info">No medical history found.</div>
+  {% endif %}
+</div>
+{% endblock %}

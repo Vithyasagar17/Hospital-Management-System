@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Manage Patients</h2>
+
+  <div class="table-responsive mt-3">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Age</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patients %}
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>{{ p.name or '—' }}</td>
+          <td>{{ p.contact or '—' }}</td>
+          <td>{{ p.age or '—' }}</td>
+          <td>{{ p.address or '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if not patients %}
+  <div class="alert alert-info">No patients found.</div>
+  {% endif %}
+</div>
+{% endblock %}

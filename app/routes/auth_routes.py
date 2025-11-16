@@ -17,7 +17,6 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
-            flash('Login successful!', 'success')
             if user.role == 'Admin':
                 return redirect(url_for('admin.admin_dashboard'))
             elif user.role == 'Doctor':
@@ -31,49 +30,46 @@ def login():
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        # Use get() to avoid KeyError when fields are missing
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
         role = request.form.get('role', 'Patient')
 
-        # Optional profile fields (may be empty for certain roles)
         name = request.form.get('name', '').strip()
         contact = request.form.get('contact', '').strip()
         address = request.form.get('address', '').strip()
 
         if not username or not password:
             flash('Username and password are required.', 'warning')
+        elif role in ('Patient', 'Doctor') and not name:
+            flash('Full name is required for Doctors and Patients.', 'warning')
         elif User.query.filter_by(username=username).first():
             flash('Username already exists', 'warning')
         else:
-            # Create user with selected role
             user = User(username=username, role=role)
             user.set_password(password)
             db.session.add(user)
             db.session.commit()
 
-            # If registering as a patient, create a Patient record
             if role == 'Patient':
                 patient = Patient(id=user.id, name=name or None, contact=contact or None, address=address or None)
                 db.session.add(patient)
                 db.session.commit()
 
-                # If registering as a doctor, create a Doctor record (name optional)
-                if role == 'Doctor':
-                    # attempt to read specialization id from the form
-                    spec_id = request.form.get('specialization')
-                    try:
-                        spec_id = int(spec_id) if spec_id else None
-                    except ValueError:
-                        spec_id = None
+                login_user(user)
+                return redirect(url_for('patient.patient_profile'))
 
-                    doctor = Doctor(id=user.id, name=name or None, specialization_id=spec_id)
-                    db.session.add(doctor)
-                    db.session.commit()
+            elif role == 'Doctor':
+                spec_id = request.form.get('specialization')
+                try:
+                    spec_id = int(spec_id) if spec_id else None
+                except ValueError:
+                    spec_id = None
 
-            flash('Registration successful! Please login.', 'success')
+                doctor = Doctor(id=user.id, name=name, specialization_id=spec_id)
+                db.session.add(doctor)
+                db.session.commit()
+
             return redirect(url_for('auth.login'))
-    # For GET (or after POST errors), provide available specializations to template
     specializations = Specialization.query.order_by(Specialization.name).all()
     return render_template('register.html', specializations=specializations)
 
@@ -81,5 +77,4 @@ def register():
 @login_required
 def logout():
     logout_user()
-    flash('Logged out successfully', 'info')
     return redirect(url_for('auth.login'))

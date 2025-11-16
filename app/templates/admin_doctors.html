@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Manage Doctors</h2>
+
+  <div class="table-responsive mt-3">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Specialization</th>
+          <th>Username (user id)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in doctors %}
+        <tr>
+          <td>{{ d.id }}</td>
+          <td>{{ d.name or '—' }}</td>
+          <td>{{ d.specialization.name if d.specialization else '—' }}</td>
+          <td>{{ d.id }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if not doctors %}
+  <div class="alert alert-info">No doctors found.</div>
+  {% endif %}
+</div>
+{% endblock %}

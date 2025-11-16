@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Patients</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patients %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ p.name or 'Unknown' }}</td>
+          <td>{{ p.age or '-' }}</td>
+          <td>{{ p.gender or '-' }}</td>
+          <td>{{ p.contact or '-' }}</td>
+          <td>
+            <a class="btn btn-sm btn-primary" href="{{ url_for('doctor.doctor_view_patient', patient_id=p.id) }}">View</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6">No patients found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

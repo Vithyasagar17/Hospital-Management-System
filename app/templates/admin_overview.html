@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Admin Overview</h2>
+
+  <h4 class="mt-4">Doctors</h4>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Specialization</th>
+          <th>Username (user id)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in doctors %}
+        <tr>
+          <td>{{ d.id }}</td>
+          <td>{{ d.name }}</td>
+          <td>{{ d.specialization.name if d.specialization else '—' }}</td>
+          <td>{{ d.id }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h4 class="mt-4">Patients</h4>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>Age</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patients %}
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.contact or '—' }}</td>
+          <td>{{ p.age or '—' }}</td>
+          <td>{{ p.address or '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h4 class="mt-4">Appointments</h4>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Doctor</th>
+          <th>Patient</th>
+          <th>Age</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Notes</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in appointments %}
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.date.strftime('%Y-%m-%d') if a.date else '—' }}</td>
+          <td>{{ a.time }}</td>
+          <td>Dr. {{ a.doctor.name if a.doctor else '—' }}</td>
+          <td>{{ a.patient.name if a.patient else '—' }}</td>
+          <td>{{ a.patient.age if a.patient and a.patient.age else '—' }}</td>
+          <td>{{ a.reason }}</td>
+          <td>{{ a.status }}</td>
+          <td>{{ a.notes or '—' }}</td>
+          <td>{{ a.created_at.strftime('%Y-%m-%d %H:%M') if a.created_at else '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}

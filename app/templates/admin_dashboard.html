@@ -26,7 +26,7 @@
           <div class="card-body">
             <h5 class="card-title">Manage Doctors</h5>
             <p class="card-text">Add, update, or remove doctor records.</p>
-            <a href="#" class="btn btn-primary">Manage</a>
+            <a href="{{ url_for('admin.admin_doctors') }}" class="btn btn-primary">Manage</a>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
           <div class="card-body">
             <h5 class="card-title">Manage Patients</h5>
             <p class="card-text">View and manage all registered patients.</p>
-            <a href="#" class="btn btn-success">View</a>
+            <a href="{{ url_for('admin.admin_patients') }}" class="btn btn-success">View</a>
           </div>
         </div>
       </div>
@@ -46,39 +46,11 @@
           <div class="card-body">
             <h5 class="card-title">Appointments</h5>
             <p class="card-text">View and organize appointment schedules.</p>
-            <a href="#" class="btn btn-warning text-dark">Check</a>
+            <a href="{{ url_for('admin.admin_appointments') }}" class="btn btn-warning text-dark">Check</a>
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="card shadow-sm border-info">
-          <div class="card-body">
-            <h5 class="card-title">Reports & Analytics</h5>
-            <p class="card-text">View overall hospital reports and performance.</p>
-            <a href="#" class="btn btn-info text-white">View Reports</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card shadow-sm border-danger">
-          <div class="card-body">
-            <h5 class="card-title">System Settings</h5>
-            <p class="card-text">Control user access, roles, and configurations.</p>
-            <a href="#" class="btn btn-danger">Configure</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card shadow-sm border-secondary">
-          <div class="card-body">
-            <h5 class="card-title">Logs & Security</h5>
-            <p class="card-text">Monitor activity logs and security alerts.</p>
-            <a href="#" class="btn btn-secondary">View Logs</a>
-          </div>
-        </div>
       </div>
     </div>
   </div>

@@ -1,37 +1,29 @@
-/* -------------------------------------------------------------------
- * Global Styling for Hospital Management System (HMS)
- * ------------------------------------------------------------------- */
-
 body {
-    font-family: 'Inter', sans-serif; /* Recommended modern font */
-    background-color: #e9ecef; /* Light gray background */
+    font-family: 'Inter', sans-serif;
+    background-color: #e9ecef;
     min-height: 100vh;
 }
-
-/* Primary Color Palette (Medical Blue/Teal) */
 :root {
-    /* Updated cohesive palette */
-    --hms-primary: #0d6efd; /* Bootstrap primary blue */
-    --hms-accent: #0dcaf0;  /* cyan accent */
-    --hms-success: #28a745; /* green */
-    --hms-bg: #f8fafc; /* very light background */
+
+    --hms-primary: #0d6efd; 
+    --hms-accent: #0dcaf0; 
+    --hms-success: #28a745;
+    --hms-bg: #f8fafc;
 }
 
-/* Navbar Customization */
 .navbar {
     background-color: var(--hms-primary) !important;
     border-bottom: 3px solid rgba(13,110,253,0.12);
 }
 
-/* Card and Forms Styling */
 .card {
-    border-radius: 12px; /* Smoother rounded corners */
+    border-radius: 12px;
     border: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px); /* Slight lift on hover */
+    transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -41,12 +33,11 @@ body {
     font-weight: 600;
 }
 
-/* Form Inputs */
+
 .form-control, .btn {
-    border-radius: 20px; /* Highly rounded inputs and buttons */
+    border-radius: 20px; 
 }
 
-/* Button Customization */
 .btn-primary {
     background-color: var(--hms-primary);
     border-color: var(--hms-primary);
@@ -68,7 +59,6 @@ body {
     border-color: #1e7e34;
 }
 
-/* Dashboard Stat Cards */
 .card.bg-info { background-color: var(--hms-info) !important; }
 
 body {
@@ -78,7 +68,6 @@ body {
     padding: 0;
 }
 
-/* Navbar brand logo sizing */
 .navbar-brand img {
     height: 36px;
     width: auto;
@@ -100,7 +89,6 @@ nav a {
     padding: 20px;
 }
 
-/* ---------- Auth (login / register) styles ---------- */
 .auth-wrapper {
     min-height: calc(100vh - 60px);
     display: flex;
@@ -184,7 +172,6 @@ nav a {
     font-size: 13px;
 }
 
-/* Flash message styles */
 .flash {
     padding: 10px 12px;
     border-radius: 8px;

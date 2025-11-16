@@ -18,15 +18,18 @@
   </nav>
 
   <div class="container mt-4">
-    <h2 class="text-center mb-4">Welcome, {{ current_user.username }}!</h2>
+  <h2 class="text-center mb-4">Welcome, {{ patient_name }}!</h2>
 
     <div class="row g-4">
+      <div class="mb-3 text-end">
+        <a href="{{ url_for('patient.patient_profile') }}" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+      </div>
       <div class="col-md-4">
         <div class="card shadow-sm border-primary">
           <div class="card-body">
             <h5 class="card-title">Book Appointment</h5>
             <p class="card-text">Schedule an appointment with your preferred doctor.</p>
-            <a href="#" class="btn btn-primary">Book Now</a>
+            <a href="{{ url_for('patient.book_appointment') }}" class="btn btn-primary">Book Now</a>
           </div>
         </div>
       </div>
@@ -36,7 +39,7 @@
           <div class="card-body">
             <h5 class="card-title">View Appointments</h5>
             <p class="card-text">Check your upcoming and past appointments.</p>
-            <a href="#" class="btn btn-success">View</a>
+            <a href="{{ url_for('patient.view_appointments') }}" class="btn btn-success">View</a>
           </div>
         </div>
       </div>
@@ -46,7 +49,7 @@
           <div class="card-body">
             <h5 class="card-title">Medical History</h5>
             <p class="card-text">View your diagnosis reports and treatment history.</p>
-            <a href="#" class="btn btn-info text-white">View History</a>
+            <a href="{{ url_for('patient.medical_history') }}" class="btn btn-info text-white">View History</a>
           </div>
         </div>
       </div>

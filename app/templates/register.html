@@ -5,7 +5,7 @@
     <div class="card shadow-sm" style="width:100%;max-width:640px;">
         <div class="card-body">
             <h3 class="card-title mb-1">Create an account</h3>
-            <p class="text-muted mb-4">Register as a Doctor or Patient to get started</p>
+            <p class="text-muted mb-4">Register as a Doctor or Patient</p>
 
             <form method="POST" action="{{ url_for('auth.register') }}">
                 <div class="row g-3">
@@ -60,25 +60,29 @@
                 <p class="text-center text-muted small mt-3">Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
             </form>
                             <script>
-                                // Show specialization select only when Role == Doctor
                                 (function(){
                                     const roleEl = document.getElementById('role');
                                     const specGroup = document.getElementById('specialization-group');
 
-                                    function toggleSpec() {
-                                        if (!roleEl) return;
-                                        if (roleEl.value === 'Doctor') {
-                                            specGroup.classList.remove('d-none');
-                                        } else {
-                                            specGroup.classList.add('d-none');
-                                            const sel = document.getElementById('specialization');
-                                            if (sel) sel.value = '';
+                                        function toggleSpec() {
+                                            if (!roleEl) return;
+                                            const nameInput = document.getElementById('name');
+                                            if (roleEl.value === 'Doctor') {
+                                                specGroup.classList.remove('d-none');
+                                                if (nameInput) nameInput.required = true;
+                                            } else if (roleEl.value === 'Patient') {
+                                                specGroup.classList.add('d-none');
+                                                if (nameInput) nameInput.required = true;
+                                            } else {
+                                                specGroup.classList.add('d-none');
+                                                if (nameInput) nameInput.required = false;
+                                                const sel = document.getElementById('specialization');
+                                                if (sel) sel.value = '';
+                                            }
                                         }
-                                    }
 
                                     if (roleEl) {
                                         roleEl.addEventListener('change', toggleSpec);
-                                        // initial state
                                         toggleSpec();
                                     }
                                 })();

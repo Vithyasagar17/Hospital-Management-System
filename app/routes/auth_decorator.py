@@ -3,7 +3,6 @@ from flask import flash, redirect, url_for
 from flask_login import current_user
 
 def role_required(role):
-    """Decorator to restrict access by user role."""
     def wrapper(fn):
         @wraps(fn)
         def decorated_view(*args, **kwargs):

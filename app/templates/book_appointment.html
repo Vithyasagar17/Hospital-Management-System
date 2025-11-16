@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Book an Appointment</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('patient.book_appointment') }}">
+                <!-- Doctor Selection -->
+                <div class="mb-3">
+                    <label for="doctor_id" class="form-label">Select Doctor</label>
+                    <select class="form-select" id="doctor_id" name="doctor_id" required>
+                        <option value="">Choose a doctor...</option>
+                        {% for doctor in doctors %}
+                        <option value="{{ doctor.id }}">Dr. {{ doctor.name }} {% if doctor.specialization %}({{ doctor.specialization.name }}){% endif %}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Patient Details (read-only) -->
+                <div class="mb-3">
+                    <label class="form-label">Patient Name</label>
+                    <input type="text" class="form-control" value="{{ patient.name }}" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    <input type="text" class="form-control" value="{{ patient.age }}" readonly>
+                </div>
+
+                <!-- Appointment Date and Time -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="date" class="form-label">Preferred Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required 
+                               min="{{ now.strftime('%Y-%m-%d') }}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="time" class="form-label">Preferred Time</label>
+                        <input type="time" class="form-control" id="time" name="time" required>
+                    </div>
+                </div>
+
+                <!-- Reason for Visit -->
+                <div class="mb-3">
+                    <label for="reason" class="form-label">Reason for Visit</label>
+                    <textarea class="form-control" id="reason" name="reason" rows="3" required 
+                              placeholder="Please describe your symptoms or reason for consultation..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Book Appointment</button>
+                <a href="{{ url_for('patient.patient_dashboard') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Set min date to today
+    document.getElementById('date').min = new Date().toISOString().split('T')[0];
+</script>
+{% endblock %}

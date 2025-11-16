@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Prescription #{{ prescription.id }}</h2>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <p><strong>Patient:</strong> {{ prescription.appointment.patient.name if prescription.appointment and prescription.appointment.patient else '—' }}</p>
+      <p><strong>Doctor:</strong> {{ prescription.appointment.doctor.name if prescription.appointment and prescription.appointment.doctor else '—' }}</p>
+  <p><strong>Date:</strong> {{ prescription.created_at.strftime('%Y-%m-%d %H:%M') if prescription.created_at else '—' }}</p>
+  <p><strong>Reason for Visit:</strong> {{ prescription.appointment.reason if prescription.appointment and prescription.appointment.reason else '—' }}</p>
+  <form method="POST" action="{{ url_for('doctor.edit_prescription', prescription_id=prescription.id) }}" class="mb-3">
+        <div class="form-group">
+          <label><strong>Diagnosis:</strong></label>
+          <textarea name="diagnosis" class="form-control" rows="3" required>{{ prescription.diagnosis }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary mt-2">Update Diagnosis</button>
+      </form>
+    </div>
+  </div>
+
+  <h4>Medicines</h4>
+  <div class="table-responsive mb-3">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Medicine</th>
+          <th>Dosage</th>
+          <th>Duration</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in prescription.items %}
+        <tr>
+          <td>{{ item.medicine }}</td>
+          <td>{{ item.dosage or '—' }}</td>
+          <td>{{ item.duration or '—' }}</td>
+          <td>{{ item.quantity or '—' }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('doctor.delete_medicine', item_id=item.id) }}" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove this medicine?')">Remove</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if not prescription.items %}
+    <div class="alert alert-info">No medicines added yet.</div>
+    {% endif %}
+  </div>
+
+  <h5>Add Medicine</h5>
+  <form method="POST" action="{{ url_for('doctor.prescription_detail', prescription_id=prescription.id) }}">
+    <div class="row g-2">
+      <div class="col-md-5">
+        <input type="text" name="medicine" class="form-control" placeholder="Medicine name" required>
+      </div>
+      <div class="col-md-2">
+        <input type="text" name="dosage" class="form-control" placeholder="Dosage (e.g., 500mg)">
+      </div>
+      <div class="col-md-3">
+        <input type="text" name="duration" class="form-control" placeholder="Duration (e.g., 5 days)">
+      </div>
+      <div class="col-md-1">
+        <input type="number" name="quantity" class="form-control" placeholder="Qty">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-primary" type="submit">Add</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="mt-3">
+    <a href="{{ url_for('doctor.prescriptions') }}" class="btn btn-secondary">Back to Prescriptions</a>
+    <form method="POST" action="{{ url_for('doctor.delete_prescription', prescription_id=prescription.id) }}" class="d-inline ms-2">
+      <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this prescription? This cannot be undone.')">Delete Prescription</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
