@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">{{ doctor.name }}</h2>
+      <hr>
+      
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>Doctor ID:</strong> {{ doctor.id }}</p>
+          <p><strong>Specialization:</strong> {{ doctor.specialization.name if doctor.specialization else 'Not specified' }}</p>
+          {% if doctor.specialization %}
+          <p><strong>Department:</strong> {{ doctor.specialization.description }}</p>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <p><strong>Status:</strong> <span class="badge badge-success">Active</span></p>
+        </div>
+      </div>
+
+      <hr>
+      
+      <div class="mt-4">
+        <a href="{{ url_for('patient.book_appointment') }}" class="btn btn-primary">Book Appointment</a>
+        <a href="{{ url_for('patient.search_doctors') }}" class="btn btn-secondary">Back to Search</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
